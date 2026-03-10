@@ -46,7 +46,7 @@ type DownloadTrack = SubtitleTrackOption | FallbackDownloadTrack;
 
 export function SummarySection({ segments, targetLanguage }: Props) {
   const { videoTitle, videoId, sourceSegments, subtitleTracks, currentTime } = useSubtitleStore();
-  const { createMemo } = useMemoStore();
+  const { memos, createMemo, removeMemo } = useMemoStore();
   const ui = useUiText();
   const filename = videoTitle || videoId;
   const [open, setOpen] = useState(false);
@@ -463,8 +463,8 @@ export function SummarySection({ segments, targetLanguage }: Props) {
           </button>
 
           {memoOpen && (
-            <div className="absolute right-0 mt-2 w-72 p-4 bg-white rounded-2xl shadow-2xl animate-fade-in z-30 ring-1 ring-black/5">
-              <div className="flex items-center justify-between mb-3">
+            <div className="absolute right-0 mt-2 w-80 p-4 bg-white rounded-2xl shadow-2xl animate-fade-in z-30 ring-1 ring-black/5 flex flex-col gap-3">
+              <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-text-primary uppercase tracking-wider">{ui.t('memo.new')}</span>
                 <span className="text-[10px] font-bold text-violet-600 bg-violet-50 px-2 py-0.5 rounded-lg">
                   {formatTimestamp(currentTime)}
@@ -480,25 +480,23 @@ export function SummarySection({ segments, targetLanguage }: Props) {
                       setMemoSaving(true);
                       void createMemo(videoId, currentTime, memoContent.trim(), videoTitle || undefined).then(() => {
                         setMemoContent('');
-                        setMemoOpen(false);
                         setMemoSaving(false);
                       });
                     }
                   }
                 }}
                 placeholder={ui.t('memo.placeholder')}
-                rows={4}
+                rows={3}
                 className="w-full px-3 py-2.5 text-sm bg-bg-subtle rounded-xl resize-none text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-violet-100 font-medium"
                 autoFocus
               />
-              <div className="flex justify-end mt-3">
+              <div className="flex justify-end mt-1">
                 <button
                   onClick={() => {
                     if (!memoContent.trim() || !videoId) return;
                     setMemoSaving(true);
                     void createMemo(videoId, currentTime, memoContent.trim(), videoTitle || undefined).then(() => {
                       setMemoContent('');
-                      setMemoOpen(false);
                       setMemoSaving(false);
                     });
                   }}
@@ -508,6 +506,36 @@ export function SummarySection({ segments, targetLanguage }: Props) {
                   {ui.t('common.save')}
                 </button>
               </div>
+
+              {memos.length > 0 && (
+                <>
+                  <div className="h-px bg-bg-elevated my-1" />
+                  <div className="flex flex-col gap-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
+                    {memos.map((memo) => (
+                      <div key={memo.id} className="p-3 bg-bg-subtle/50 rounded-xl group relative transition-all hover:bg-bg-subtle/80">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[10px] font-bold text-text-muted bg-white px-1.5 py-0.5 rounded shadow-sm">
+                            {formatTimestamp(memo.timestamp)}
+                          </span>
+                          <button
+                            onClick={() => {
+                              if (videoId) {
+                                void removeMemo(videoId, memo.id);
+                              }
+                            }}
+                            className="opacity-0 group-hover:opacity-100 text-[10px] text-red-400 hover:text-red-500 font-bold transition-all"
+                          >
+                            {ui.t('common.delete')}
+                          </button>
+                        </div>
+                        <p className="text-xs text-text-secondary leading-relaxed whitespace-pre-wrap font-medium">
+                          {memo.content}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

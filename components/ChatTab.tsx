@@ -95,8 +95,14 @@ function useTypewriter(fullText: string, active: boolean) {
   return { displayed, done, skip };
 }
 
-function AiMessageBubble({ text, isLatest }: { text: string; isLatest: boolean }) {
+function AiMessageBubble({ text, isLatest, onComplete }: { text: string; isLatest: boolean; onComplete?: () => void }) {
   const { displayed, done, skip } = useTypewriter(text, isLatest);
+
+  useEffect(() => {
+    if (done && isLatest && onComplete) {
+      onComplete();
+    }
+  }, [done, isLatest, onComplete]);
 
   return (
     <div className="group" onClick={!done ? skip : undefined}>
@@ -320,6 +326,9 @@ export function ChatTab({ targetLanguage }: Props) {
                 <AiMessageBubble
                   text={msg.text}
                   isLatest={i === animatingIndex}
+                  onComplete={() => {
+                    if (i === animatingIndex) setAnimatingIndex(null);
+                  }}
                 />
               </div>
             </div>
