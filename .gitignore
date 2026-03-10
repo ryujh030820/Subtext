@@ -7,3 +7,7 @@ node_modules
 AGENTS.md
 CLAUDE.md
 GEMINI.md
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
