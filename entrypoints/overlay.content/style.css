@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors — Refined Zinc & Sophisticated Indigo */
+  --color-bg-base: #ffffff;
+  --color-bg-subtle: #f9f9fb;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #f1f1f4;
+  --color-bg-recessed: #e9e9ed;
+  
+  --color-text-primary: #1a1a1e;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #94949e;
+  --color-text-description: #71717a;
+  
+  --color-accent: #18181b; /* Deep Zinc for primary actions */
+  --color-accent-brand: #6366f1; /* Indigo for AI/Brand highlights */
+  --color-accent-soft: rgba(99, 102, 241, 0.06);
+  
+  --color-border-subtle: transparent;
+  --color-border-default: transparent;
+  --color-border-strong: transparent;
+  
+  --color-danger: #ef4444;
+
+  /* Fonts */
+  --font-display: "Geist", "Inter", sans-serif;
+  --font-body: "Geist", "Inter", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
+  /* Spacing & Sizing (Override for YouTube's 10px html font-size) */
+  --spacing: 4px;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 13.5px;
+  --text-sm--line-height: 20px;
+  --text-base: 15px;
+  --text-base--line-height: 24px;
+  --text-lg: 18px;
+  --text-lg--line-height: 28px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-up: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pulse-soft: pulse-soft 2s ease-in-out infinite;
+  --animate-blink: blink 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0.8; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-out-right {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0.8; }
+}
+
+/* Base Reset & Typography */
+:host {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--color-text-primary);
+}
+
+/* Custom Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-recessed);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Glassmorphism & Modern Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.ai-card-glow {
+  position: relative;
+  border: none;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-color: var(--color-bg-subtle);
+  box-shadow: 0 4px 20px -4px rgba(99, 102, 241, 0.08);
+}
+
+.active-segment {
+  background: var(--color-bg-subtle);
+  position: relative;
+}
+
+.active-segment::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--color-accent-brand);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Container */
+.overlay-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px; /* Slightly wider for modern spacious feel */
+  height: 100vh;
+  z-index: 2147483647;
+  background: var(--color-bg-base);
+  border-left: none;
+  box-shadow: -20px 0 60px -10px rgba(0, 0, 0, 0.05);
+  animation: slide-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay-panel.closing {
+  animation: slide-out-right 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Skeleton loader */
+.skeleton-bar {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 25%,
+    var(--color-bg-recessed) 50%,
+    var(--color-bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+  border-radius: 6px;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-accent/90 active:scale-[0.97] shadow-sm;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-lg bg-bg-elevated px-4 py-2.5 text-sm font-semibold text-text-secondary transition-all hover:bg-bg-recessed active:scale-[0.97];
+}
+
+.icon-btn {
+  @apply flex items-center justify-center rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-elevated transition-all active:scale-95;
+}
+
+/* Chat markdown rendering */
+.chat-markdown > :first-child { margin-top: 0; }
+.chat-markdown > :last-child { margin-bottom: 0; }
+
+.chat-markdown p {
+  margin: 0.4em 0;
+  line-height: 1.6;
+}
+
+.chat-markdown strong {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.chat-markdown em {
+  font-style: italic;
+}
+
+.chat-markdown ol,
+.chat-markdown ul {
+  margin: 0.4em 0;
+  padding-left: 1.4em;
+}
+
+.chat-markdown ol { list-style-type: decimal; }
+.chat-markdown ul { list-style-type: disc; }
+
+.chat-markdown li {
+  margin: 0.25em 0;
+  line-height: 1.55;
+}
+
+.chat-markdown li > p {
+  margin: 0;
+}
+
+.chat-markdown code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-bg-elevated);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.chat-markdown pre {
+  margin: 0.8em 0;
+  padding: 1rem;
+  background: var(--color-bg-subtle);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.chat-markdown pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.chat-markdown blockquote {
+  margin: 0.8em 0;
+  padding: 0.4em 0 0.4em 1em;
+  border-left: 4px solid var(--color-accent-brand);
+  background: var(--color-bg-subtle);
+  border-radius: 0 8px 8px 0;
+  color: var(--color-text-secondary);
+}
+
+.chat-markdown h1,
+.chat-markdown h2,
+.chat-markdown h3 {
+  font-weight: 700;
+  margin: 1em 0 0.4em;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
+.chat-markdown h1 { font-size: 1.25em; }
+.chat-markdown h2 { font-size: 1.15em; }
+.chat-markdown h3 { font-size: 1.05em; }
+
+.chat-markdown hr {
+  margin: 1.2em 0;
+  border: none;
+  height: 2px;
+  background: var(--color-bg-elevated);
+}
+
+.chat-markdown a {
+  color: var(--color-accent-brand);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1.5px solid var(--color-accent-soft);
+  transition: border-color 0.2s;
+}
+
+.chat-markdown a:hover {
+  border-bottom-color: var(--color-accent-brand);
+}
+
+.chat-markdown table {
+  margin: 0.8em 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-markdown th,
+.chat-markdown td {
+  padding: 0.6em 0.8em;
+  text-align: left;
+}
+
+.chat-markdown th {
+  background: var(--color-bg-elevated);
+  font-weight: 700;
+}
+
+.chat-markdown td {
+  background: var(--color-bg-subtle);
+}
+
+.chat-markdown tr:not(:last-child) td {
+  border-bottom: 1px solid var(--color-bg-elevated);
+}

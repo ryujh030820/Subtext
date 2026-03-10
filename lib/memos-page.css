@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #ffffff;
+  --color-bg-subtle: #f9f9fb;
+  --color-bg-elevated: #f1f1f4;
+  --color-bg-recessed: #e9e9ed;
+  
+  --color-text-primary: #1a1a1e;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #94949e;
+  
+  --color-accent: #18181b;
+  --color-accent-brand: #6366f1;
+  --color-accent-soft: rgba(99, 102, 241, 0.06);
+  
+  --color-border-default: transparent;
+  --color-border-subtle: transparent;
+  
+  --color-danger: #ef4444;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  font-family: "Geist", "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.memo-card {
+  @apply bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-accent/90 active:scale-[0.97] shadow-md shadow-accent/10;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-xl bg-bg-elevated px-5 py-2.5 text-sm font-bold text-text-secondary transition-all hover:bg-bg-recessed active:scale-[0.97];
+}
