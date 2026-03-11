@@ -57,8 +57,9 @@ ${text.slice(0, 30000)}`;
       { maxOutputTokens: 4096 },
     );
 
+    const isSentence = (s: string) => typeof s === 'string' && s.trim().length >= 5 && s.trim().split(/\s+/).length >= 2;
     const result = {
-      summary: Array.isArray(parsed.summary) ? parsed.summary.filter((item) => typeof item === 'string').slice(0, 3) : [],
+      summary: Array.isArray(parsed.summary) ? parsed.summary.filter(isSentence).slice(0, 3) : [],
       keywords: Array.isArray(parsed.keywords) ? parsed.keywords.filter((item) => typeof item === 'string').slice(0, 3) : [],
     };
 
