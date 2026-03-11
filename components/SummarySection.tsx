@@ -571,8 +571,12 @@ function DetailedSummaryToolbar({ markdown, videoTitle }: { markdown: string; vi
 
   const handleExportObsidian = () => {
     const title = sanitizeFilenamePart(videoTitle) || 'YouTube Summary';
-    const uri = `obsidian://new?name=${encodeURIComponent(title)}&content=${encodeURIComponent(markdown)}`;
-    window.open(uri, '_blank');
+    const uri = `obsidian://new?name=${encodeURIComponent(title)}&content=${encodeURIComponent(markdown)}&silent=true`;
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = uri;
+    document.body.appendChild(iframe);
+    setTimeout(() => iframe.remove(), 1000);
   };
 
   const handleDownloadMd = () => {
