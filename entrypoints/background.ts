@@ -83,30 +83,31 @@ ${text.slice(0, 30000)}`;
 
     const prompt = `You are a video content summarizer. Given the transcript below, write a structured summary in the following format. Follow the example format exactly.
 
-${languageInstruction}
+CRITICAL: ${languageInstruction} Every single word, including section titles, must be in the target language. Do NOT mix languages.
 
---- EXAMPLE (Korean) ---
-## 개요
-이 영상은 [주제]에 대해 설명하는 영상입니다. [핵심 내용 1~2문장으로 요약]
+--- EXAMPLE FORMAT ---
+## [Overview]
+This video explains [topic]. [1-2 sentence summary of the core content]
 
-## 주요 내용
-- **[소주제 1]**: [해당 내용 요약 1~2문장]
-- **[소주제 2]**: [해당 내용 요약 1~2문장]
-- **[소주제 3]**: [해당 내용 요약 1~2문장]
+## [Key Topics]
+- **[Subtopic 1]**: [1-2 sentence summary]
+- **[Subtopic 2]**: [1-2 sentence summary]
+- **[Subtopic 3]**: [1-2 sentence summary]
 
-## 핵심 포인트
-- [가장 중요한 인사이트 1]
-- [가장 중요한 인사이트 2]
-- [가장 중요한 인사이트 3]
+## [Key Takeaways]
+- [Most important insight 1]
+- [Most important insight 2]
+- [Most important insight 3]
 --- END EXAMPLE ---
 
 Rules:
-- Use the same section structure (Overview, Key Topics, Key Takeaways) but translate section titles to match the output language.
+- Translate ALL section titles and content into the target language. For example, if the target language is English, use "Overview", "Key Topics", "Key Takeaways". If Korean, use "개요", "주요 내용", "핵심 포인트". Etc.
 - "Key Topics" should have 3–5 items depending on content richness.
 - "Key Takeaways" should have exactly 3 items.
 - Every sentence must be grammatically complete. For Korean use proper verb endings (합니다/입니다/습니다), for Japanese use です/ます, etc.
 - Be concise but informative. Total length should be around 200–350 words.
 - Do NOT use code blocks or JSON. Output plain markdown only.
+- REMINDER: ${languageInstruction}
 
 Transcript:
 ${text.slice(0, 60000)}`;
