@@ -221,12 +221,12 @@ Answer questions based on this transcript. Be concise and helpful. If the answer
       })),
     ];
 
-    const apiKey = import.meta.env.WXT_GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error('WXT_GEMINI_API_KEY is not set in .env');
+    const proxyUrl = import.meta.env.WXT_PROXY_URL;
+    if (!proxyUrl) {
+      throw new Error('WXT_PROXY_URL is not set in .env');
     }
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `${proxyUrl}/api/gemini`;
     const resp = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -422,12 +422,12 @@ async function requestGeminiText(
   responseJsonSchema?: AnyObj,
   options?: { maxOutputTokens?: number },
 ): Promise<string> {
-  const apiKey = import.meta.env.WXT_GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error('WXT_GEMINI_API_KEY is not set in .env');
+  const proxyUrl = import.meta.env.WXT_PROXY_URL;
+  if (!proxyUrl) {
+    throw new Error('WXT_PROXY_URL is not set in .env');
   }
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const endpoint = `${proxyUrl}/api/gemini`;
   const resp = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

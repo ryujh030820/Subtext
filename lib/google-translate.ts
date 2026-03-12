@@ -29,9 +29,9 @@ export async function translateSegmentsWithGoogleCloud(
     return [];
   }
 
-  const apiKey = import.meta.env.WXT_GOOGLE_TRANSLATE_API_KEY as string | undefined;
-  if (!apiKey) {
-    throw new Error('WXT_GOOGLE_TRANSLATE_API_KEY is not set in .env');
+  const proxyUrl = import.meta.env.WXT_PROXY_URL as string | undefined;
+  if (!proxyUrl) {
+    throw new Error('WXT_PROXY_URL is not set in .env');
   }
 
   const normalizedTarget = normalizeGoogleLanguageCode(targetLanguage);
@@ -64,7 +64,7 @@ export async function translateSegmentsWithGoogleCloud(
         texts: batch.texts,
         targetLanguage: normalizedTarget,
         sourceLanguage: normalizedSource || undefined,
-        apiKey,
+        proxyUrl,
       });
       batch.texts.forEach((text, index) => {
         translatedTextMap.set(text, translatedTexts[index] ?? text);
@@ -124,9 +124,9 @@ async function requestGoogleTranslation(params: {
   texts: string[];
   targetLanguage: string;
   sourceLanguage?: string;
-  apiKey: string;
+  proxyUrl: string;
 }): Promise<string[]> {
-  const endpoint = `https://translation.googleapis.com/language/translate/v2?key=${encodeURIComponent(params.apiKey)}`;
+  const endpoint = `${params.proxyUrl}/api/translate`;
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

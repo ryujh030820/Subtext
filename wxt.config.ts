@@ -8,7 +8,7 @@ export default defineConfig({
     description: 'A Chrome extension that extracts YouTube subtitles and summarizes key points with AI',
     version: '0.1.0',
     permissions: ['storage', 'activeTab', 'cookies'],
-    host_permissions: ['*://*.youtube.com/*', '*://*.googlevideo.com/*', '*://inv.nadeko.net/*', '*://invidious.nerdvpn.de/*', '*://iv.ggtyler.dev/*', '*://invidious.privacyredirect.com/*', '*://vid.puffyan.us/*', '*://generativelanguage.googleapis.com/*', '*://translation.googleapis.com/*'],
+    host_permissions: ['*://*.youtube.com/*', '*://*.googlevideo.com/*', '*://inv.nadeko.net/*', '*://invidious.nerdvpn.de/*', '*://iv.ggtyler.dev/*', '*://invidious.privacyredirect.com/*', '*://vid.puffyan.us/*', '*://*.workers.dev/*'],
     action: {},
     web_accessible_resources: [
       {

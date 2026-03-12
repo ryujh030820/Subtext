@@ -4,6 +4,7 @@ node_modules
 *.log
 .env
 .env.local
+.dev.vars
 AGENTS.md
 CLAUDE.md
 GEMINI.md

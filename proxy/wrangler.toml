@@ -1,0 +1,7 @@
+name = "subtext-proxy"
+main = "src/index.ts"
+compatibility_date = "2025-03-12"
+
+# Secrets (set via `wrangler secret put`):
+# - GEMINI_API_KEY
+# - GOOGLE_TRANSLATE_API_KEY
