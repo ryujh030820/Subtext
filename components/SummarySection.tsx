@@ -22,9 +22,12 @@ function markdownToHtml(md: string): string {
     .replace(/<p><\/p>/g, '');
 }
 
+type TrackFetcher = (videoId: string, track: SubtitleTrackOption) => Promise<{ segments: { text: string; duration: number; offset: number; lang: string }[] }>;
+
 interface Props {
   segments: SubtitleSegment[];
   targetLanguage: OutputLanguageCode;
+  fetchTrack?: TrackFetcher;
 }
 
 const DOWNLOAD_OPTIONS = [
@@ -44,7 +47,7 @@ type FallbackDownloadTrack = {
 };
 type DownloadTrack = SubtitleTrackOption | FallbackDownloadTrack;
 
-export function SummarySection({ segments, targetLanguage }: Props) {
+export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) {
   const { videoTitle, videoId, sourceSegments, subtitleTracks, currentTime } = useSubtitleStore();
   const { memos, createMemo, removeMemo } = useMemoStore();
   const ui = useUiText();
@@ -192,13 +195,19 @@ export function SummarySection({ segments, targetLanguage }: Props) {
     setDownloadError(null);
 
     try {
-      const downloadSegments = selectedTrack.source === 'fallback'
-        ? sourceSegments
-        : normalizeTranscript((await withTimeout(
-            sendMessage('fetchSubtitleTrack', { videoId, track: selectedTrack }),
-            40000,
-            'Timed out while downloading subtitles.',
-          )).segments);
+      let downloadSegments: SubtitleSegment[];
+      if (selectedTrack.source === 'fallback') {
+        downloadSegments = sourceSegments;
+      } else {
+        const fetcher = fetchTrack
+          ? fetchTrack(videoId, selectedTrack)
+          : sendMessage('fetchSubtitleTrack', { videoId, track: selectedTrack });
+        downloadSegments = normalizeTranscript((await withTimeout(
+          fetcher,
+          40000,
+          'Timed out while downloading subtitles.',
+        )).segments);
+      }
 
       if (downloadSegments.length === 0) {
         throw new Error(ui.t('summary.download.noTracks'));
