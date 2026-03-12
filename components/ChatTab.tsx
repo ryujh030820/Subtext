@@ -151,6 +151,7 @@ export function ChatTab({ targetLanguage }: Props) {
   useEffect(() => {
     if (videoId !== prevVideoIdRef.current) {
       prevVideoIdRef.current = videoId;
+      setMessages([]);
       setInput('');
       setError(null);
       setSuggestions([]);
@@ -159,16 +160,18 @@ export function ChatTab({ targetLanguage }: Props) {
     }
     if (videoId) {
       void getChatHistory(videoId).then((history) => {
-        setMessages(history);
+        if (prevVideoIdRef.current === videoId) {
+          setMessages(history);
+        }
       });
-    } else {
-      setMessages([]);
     }
   }, [videoId]);
 
   // Save chat history when messages change
+  const saveVideoIdRef = useRef(videoId);
+  saveVideoIdRef.current = videoId;
   useEffect(() => {
-    if (videoId && messages.length > 0) {
+    if (videoId && messages.length > 0 && saveVideoIdRef.current === videoId) {
       void saveChatHistory(videoId, messages);
     }
   }, [videoId, messages]);
