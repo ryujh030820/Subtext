@@ -15,7 +15,7 @@ export function LanguageSelect({ value, disabled = false, onChange }: Props) {
   const ui = useUiText();
 
   return (
-    <label className="flex items-center gap-2 rounded-lg border border-border-default bg-white px-2.5 py-1.5 text-[11px] text-text-secondary shadow-sm">
+    <label className="flex items-center gap-2 rounded-lg border border-border-default bg-bg-base px-2.5 py-1.5 text-[11px] text-text-secondary shadow-sm">
       <span className="shrink-0 whitespace-nowrap font-semibold text-text-muted">{ui.t('language')}</span>
       <select
         value={value}

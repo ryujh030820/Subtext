@@ -97,7 +97,7 @@ export function ArticleTab({ onSeek, targetLanguage }: Props) {
   if (segments.length === 0) {
     if (isLoading) {
       return (
-        <div className="px-5 py-4 space-y-3 bg-white">
+        <div className="px-5 py-4 space-y-3 bg-bg-base">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="rounded-xl border border-border-subtle p-4 space-y-2">
               <div className="h-4 w-1/3 skeleton-bar" />
@@ -111,15 +111,15 @@ export function ArticleTab({ onSeek, targetLanguage }: Props) {
     }
 
     return (
-      <div className="flex items-center justify-center h-full px-10 text-center text-sm text-text-muted bg-white">
+      <div className="flex items-center justify-center h-full px-10 text-center text-sm text-text-muted bg-bg-base">
         {ui.t('article.empty')}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      <div className="px-6 py-5 sticky top-0 bg-white/80 backdrop-blur-md z-10 space-y-4">
+    <div className="flex flex-col h-full bg-bg-base">
+      <div className="px-6 py-5 sticky top-0 bg-bg-base/80 backdrop-blur-md z-10 space-y-4">
         <div>
           <p className="text-sm font-bold text-text-primary tracking-tight">{ui.t('article.title')}</p>
           <p className="mt-1 text-[11px] text-text-muted font-medium leading-relaxed">

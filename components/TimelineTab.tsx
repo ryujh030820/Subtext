@@ -82,7 +82,7 @@ export function TimelineTab({ onSeek, targetLanguage }: Props) {
   if (segments.length === 0) {
     if (isLoading) {
       return (
-        <div className="px-5 py-4 space-y-3 bg-white">
+        <div className="px-5 py-4 space-y-3 bg-bg-base">
           {Array.from({ length: 6 }).map((_, index) => (
             <div key={index} className="rounded-xl border border-border-subtle p-4 space-y-2">
               <div className="h-3 w-20 skeleton-bar" />
@@ -94,15 +94,15 @@ export function TimelineTab({ onSeek, targetLanguage }: Props) {
     }
 
     return (
-      <div className="flex items-center justify-center h-full px-10 text-center text-sm text-text-muted bg-white">
+      <div className="flex items-center justify-center h-full px-10 text-center text-sm text-text-muted bg-bg-base">
         {ui.t('timeline.empty')}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      <div className="px-6 py-5 sticky top-0 bg-white/80 backdrop-blur-md z-10">
+    <div className="flex flex-col h-full bg-bg-base">
+      <div className="px-6 py-5 sticky top-0 bg-bg-base/80 backdrop-blur-md z-10">
         <p className="text-sm font-bold text-text-primary tracking-tight">{ui.t('timeline.title')}</p>
         <p className="mt-1 text-[11px] text-text-muted font-medium leading-relaxed">
           {ui.t('timeline.description')}
@@ -184,7 +184,7 @@ function getImportanceStyle(importance: number, ui: ReturnType<typeof useUiText>
       cardClass: 'bg-indigo-50/50 hover:bg-indigo-50/80',
       activeCardClass: 'bg-indigo-600 text-white',
       dotClass: 'bg-indigo-400',
-      activeDotClass: 'bg-white',
+      activeDotClass: 'bg-bg-base',
       timestampClass: 'bg-indigo-100/50 text-indigo-700',
       activeTimestampClass: 'bg-white/20 text-white',
       textClass: 'text-indigo-950 font-bold',
@@ -200,7 +200,7 @@ function getImportanceStyle(importance: number, ui: ReturnType<typeof useUiText>
       cardClass: 'bg-rose-50/50 hover:bg-rose-50/80',
       activeCardClass: 'bg-rose-500 text-white',
       dotClass: 'bg-rose-400',
-      activeDotClass: 'bg-white',
+      activeDotClass: 'bg-bg-base',
       timestampClass: 'bg-rose-100/50 text-rose-700',
       activeTimestampClass: 'bg-white/20 text-white',
       textClass: 'text-rose-950 font-bold',

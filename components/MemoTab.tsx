@@ -55,7 +55,7 @@ export function MemoTab({ onSeek }: Props) {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col h-full bg-bg-base">
       {/* 새 메모 작성 */}
       <div className="px-6 py-5 bg-bg-subtle/50">
         <div className="flex flex-col gap-3">
@@ -64,7 +64,7 @@ export function MemoTab({ onSeek }: Props) {
                <div className="w-2 h-2 rounded-full bg-accent-brand shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
                <span className="text-[11px] font-bold text-text-primary uppercase tracking-wider">{ui.t('memo.new')}</span>
              </div>
-             <span className="text-[10px] font-bold text-accent-brand bg-white px-2.5 py-1 rounded-lg shadow-sm">
+             <span className="text-[10px] font-bold text-accent-brand bg-bg-base px-2.5 py-1 rounded-lg shadow-sm">
                {formatTimestamp(currentTime)}
              </span>
           </div>
@@ -74,7 +74,7 @@ export function MemoTab({ onSeek }: Props) {
             onKeyDown={handleKeyDown}
             placeholder={ui.t('memo.placeholder')}
             rows={3}
-            className="w-full px-4 py-3 text-sm bg-white rounded-2xl resize-none text-text-primary placeholder:text-text-muted transition-all focus:outline-none focus:ring-4 focus:ring-accent-brand/5 shadow-sm font-medium"
+            className="w-full px-4 py-3 text-sm bg-bg-base rounded-2xl resize-none text-text-primary placeholder:text-text-muted transition-all focus:outline-none focus:ring-4 focus:ring-accent-brand/5 shadow-sm font-medium"
           />
           <div className="flex justify-end">
             <button
@@ -113,7 +113,7 @@ export function MemoTab({ onSeek }: Props) {
               <div className="flex items-center justify-between mb-3">
                 <button
                   onClick={() => onSeek(memo.timestamp)}
-                  className="px-2.5 py-1 rounded-lg bg-white text-[10px] font-bold text-text-secondary shadow-sm hover:text-accent-brand hover:scale-105 transition-all"
+                  className="px-2.5 py-1 rounded-lg bg-bg-base text-[10px] font-bold text-text-secondary shadow-sm hover:text-accent-brand hover:scale-105 transition-all"
                 >
                   {formatTimestamp(memo.timestamp)}
                 </button>
@@ -139,7 +139,7 @@ export function MemoTab({ onSeek }: Props) {
                     value={editContent}
                     onChange={(e) => setEditContent(e.target.value)}
                     rows={3}
-                    className="w-full px-3 py-2.5 text-sm bg-white rounded-xl resize-none text-text-primary focus:outline-none focus:ring-4 focus:ring-accent-brand/5 shadow-sm font-medium"
+                    className="w-full px-3 py-2.5 text-sm bg-bg-base rounded-xl resize-none text-text-primary focus:outline-none focus:ring-4 focus:ring-accent-brand/5 shadow-sm font-medium"
                     autoFocus
                   />
                   <div className="flex gap-2 justify-end">
@@ -169,7 +169,7 @@ export function MemoTab({ onSeek }: Props) {
 
       {/* 내보내기 버튼 */}
       {memos.length > 0 && (
-        <div className="px-6 py-5 bg-white/80 backdrop-blur-md sticky bottom-0">
+        <div className="px-6 py-5 bg-bg-base/80 backdrop-blur-md sticky bottom-0">
           <button
             onClick={handleExport}
             className="btn-secondary w-full h-11 text-xs font-bold uppercase tracking-wider gap-2.5 shadow-sm"

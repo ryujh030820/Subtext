@@ -90,6 +90,30 @@
   to { transform: translateX(100%); opacity: 0.8; }
 }
 
+/* Dark mode overrides */
+:host(.dark) {
+  --color-bg-base: #18181b;
+  --color-bg-subtle: #1e1e22;
+  --color-bg-surface: #27272a;
+  --color-bg-elevated: #2a2a2e;
+  --color-bg-recessed: #333338;
+
+  --color-text-primary: #f0f0f2;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-text-description: #8c8c96;
+
+  --color-accent: #6366f1;
+  --color-accent-brand: #818cf8;
+  --color-accent-soft: rgba(129, 140, 248, 0.1);
+
+  --color-border-default: transparent;
+  --color-border-subtle: transparent;
+  --color-border-strong: transparent;
+
+  --color-danger: #f87171;
+}
+
 /* Base Reset & Typography */
 :host {
   font-family: var(--font-body);
@@ -136,6 +160,10 @@
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+:host(.dark) .glass {
+  background: rgba(30, 30, 34, 0.85);
 }
 
 .ai-card-glow {

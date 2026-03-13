@@ -15,10 +15,12 @@ import { ChatTab } from '@/components/ChatTab';
 import { TimelineTab } from '@/components/TimelineTab';
 import { ArticleTab } from '@/components/ArticleTab';
 import { SubtextIcon } from '@/components/SubtextIcon';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import {
   getPreferredOutputLanguage,
   onPreferredOutputLanguageChange,
 } from '@/lib/preferences';
+import { useTheme } from '@/lib/use-theme';
 import {
   DEFAULT_OUTPUT_LANGUAGE,
   isSameLanguageSelection,
@@ -100,7 +102,7 @@ function TabNav({
   return (
     <nav
       ref={navRef}
-      className="px-4 py-4 flex gap-1 justify-center sticky top-0 bg-white/80 backdrop-blur-md z-10 relative"
+      className="px-4 py-4 flex gap-1 justify-center sticky top-0 bg-bg-base/80 backdrop-blur-md z-10 relative"
     >
       <div
         className="absolute top-4 h-[calc(100%-32px)] rounded-xl bg-accent shadow-lg shadow-accent/10 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -162,10 +164,11 @@ function findMatchingTrackOption(
   return ranked[0]?.track ?? null;
 }
 
-export default function App({ onClose }: { onClose: () => void }) {
+export default function App({ onClose, shadowHost }: { onClose: () => void; shadowHost?: HTMLElement }) {
   const [activeTab, setActiveTab] = useState<TabType>('script');
   const [targetLanguage, setTargetLanguage] = useState<OutputLanguageCode>(DEFAULT_OUTPUT_LANGUAGE);
   const [isLanguageReady, setIsLanguageReady] = useState(false);
+  const { resolved, cycleTheme } = useTheme(shadowHost ?? null);
   const {
     videoId,
     sourceSegments,
@@ -359,7 +362,7 @@ export default function App({ onClose }: { onClose: () => void }) {
 
   return (
     <UiTextProvider language={targetLanguage}>
-    <div className="overlay-panel text-text-primary bg-white">
+    <div className="overlay-panel text-text-primary bg-bg-base">
       {/* 헤더 */}
       <header className="px-6 py-6 flex items-center justify-between glass sticky top-0 z-20">
         <div className="min-w-0 flex-1">
@@ -375,7 +378,8 @@ export default function App({ onClose }: { onClose: () => void }) {
             </p>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
+          <ThemeToggle resolved={resolved} onToggle={cycleTheme} />
           <button
             onClick={onClose}
             className="icon-btn w-10 h-10 rounded-xl"
@@ -389,7 +393,7 @@ export default function App({ onClose }: { onClose: () => void }) {
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col bg-white">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col bg-bg-base">
         {/* AI 요약 영역 */}
         {videoId && segments.length > 0 && (
           <div className="px-6 py-4">

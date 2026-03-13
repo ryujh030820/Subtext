@@ -44,7 +44,7 @@ export function ScriptTab({ onSeek }: Props) {
   if (segments.length === 0) {
     if (isLoading) {
       return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col h-full bg-bg-base">
           <div className="px-5 py-3 flex flex-col gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="flex gap-3">
@@ -67,7 +67,7 @@ export function ScriptTab({ onSeek }: Props) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white relative">
+    <div className="flex flex-col h-full bg-bg-base relative">
       {/* 검색 & 컨트롤 */}
       <div className="px-5 py-4 flex flex-col gap-3 sticky top-0 z-10 glass">
         <div className="relative group">
@@ -76,7 +76,7 @@ export function ScriptTab({ onSeek }: Props) {
             placeholder={ui.t('script.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 text-sm bg-bg-elevated/50 rounded-xl text-text-primary placeholder:text-text-muted transition-all focus:outline-none focus:bg-white focus:ring-4 focus:ring-accent-brand/5 font-medium"
+            className="w-full pl-10 pr-4 py-2.5 text-sm bg-bg-elevated/50 rounded-xl text-text-primary placeholder:text-text-muted transition-all focus:outline-none focus:bg-bg-base focus:ring-4 focus:ring-accent-brand/5 font-medium"
           />
           <svg
             className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted transition-colors group-focus-within:text-accent-brand"

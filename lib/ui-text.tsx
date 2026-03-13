@@ -107,7 +107,12 @@ type TranslationKey =
   | 'chat.customPrompt'
   | 'chat.customPrompt.placeholder'
   | 'chat.customPrompt.description'
-  | 'memo.openManager';
+  | 'memo.openManager'
+  | 'options.theme'
+  | 'options.themeDescription'
+  | 'options.theme.system'
+  | 'options.theme.light'
+  | 'options.theme.dark';
 
 type TranslationDict = Record<TranslationKey, string>;
 
@@ -213,6 +218,11 @@ const EN_TRANSLATIONS: TranslationDict = {
   'chat.customPrompt.placeholder': 'e.g. Answer in bullet points...',
   'chat.customPrompt.description': 'Add custom instructions for AI responses.',
   'memo.openManager': 'Memo Manager',
+  'options.theme': 'Theme',
+  'options.themeDescription': 'Choose your preferred appearance.',
+  'options.theme.system': 'System',
+  'options.theme.light': 'Light',
+  'options.theme.dark': 'Dark',
 };
 
 const LOCALE_OVERRIDES: Partial<Record<OutputLanguageCode, Partial<TranslationDict>>> = {
@@ -318,6 +328,11 @@ const LOCALE_OVERRIDES: Partial<Record<OutputLanguageCode, Partial<TranslationDi
     'chat.customPrompt.placeholder': '예: 요점을 정리해서 답변해줘...',
     'chat.customPrompt.description': 'AI 응답에 대한 사용자 지시를 추가합니다.',
     'memo.openManager': '메모 관리',
+    'options.theme': '테마',
+    'options.themeDescription': '원하는 화면 모드를 선택하세요.',
+    'options.theme.system': '시스템',
+    'options.theme.light': '라이트',
+    'options.theme.dark': '다크',
   },
   ja: {
     language: '言語',
@@ -407,6 +422,11 @@ const LOCALE_OVERRIDES: Partial<Record<OutputLanguageCode, Partial<TranslationDi
     'chat.customPrompt.placeholder': '例：箇条書きで回答してください...',
     'chat.customPrompt.description': 'AI応答へのカスタム指示を追加します。',
     'memo.openManager': 'メモ管理',
+    'options.theme': 'テーマ',
+    'options.themeDescription': 'お好みの表示モードを選択してください。',
+    'options.theme.system': 'システム',
+    'options.theme.light': 'ライト',
+    'options.theme.dark': 'ダーク',
   },
   'zh-Hans': {
     language: '语言',

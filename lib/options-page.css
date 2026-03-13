@@ -20,6 +20,26 @@
   --color-danger: #ef4444;
 }
 
+.dark {
+  --color-bg-base: #18181b;
+  --color-bg-subtle: #1e1e22;
+  --color-bg-elevated: #2a2a2e;
+  --color-bg-recessed: #333338;
+
+  --color-text-primary: #f0f0f2;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+
+  --color-accent: #6366f1;
+  --color-accent-brand: #818cf8;
+  --color-accent-soft: rgba(129, 140, 248, 0.1);
+
+  --color-border-default: transparent;
+  --color-border-subtle: transparent;
+
+  --color-danger: #f87171;
+}
+
 html,
 body,
 #root {
@@ -43,5 +63,5 @@ select {
 }
 
 .option-card {
-  @apply bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300;
+  @apply bg-bg-base rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300;
 }

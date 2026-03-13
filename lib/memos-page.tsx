@@ -5,6 +5,7 @@ import {
   type OutputLanguageCode,
 } from '@/lib/output-language';
 import { getPreferredOutputLanguage } from '@/lib/preferences';
+import { useTheme } from '@/lib/use-theme';
 import { UiTextProvider, createUiText } from '@/lib/ui-text';
 import { getAllMemos, updateMemo, deleteMemo, saveMemos } from '@/lib/storage';
 import { formatTimestamp } from '@/lib/subtitle-parser';
@@ -12,6 +13,7 @@ import type { Memo } from '@/lib/types';
 import './memos-page.css';
 
 function MemosApp() {
+  useTheme();
   const [language, setLanguage] = useState<OutputLanguageCode>(DEFAULT_OUTPUT_LANGUAGE);
   const [allMemos, setAllMemos] = useState<Record<string, Memo[]>>({});
   const [search, setSearch] = useState('');
@@ -85,7 +87,7 @@ function MemosApp() {
     <UiTextProvider language={language}>
       <main className="min-h-screen px-6 py-10">
         <div className="mx-auto max-w-2xl">
-          <div className="rounded-3xl border border-border-subtle bg-white p-8 shadow-sm">
+          <div className="rounded-3xl border border-border-subtle bg-bg-base p-8 shadow-sm">
             <p className="text-sm font-semibold text-accent-brand">{ui.t('options.title')}</p>
             <h1 className="mt-2 text-2xl font-semibold text-text-primary">{ui.t('memos.title')}</h1>
             <p className="mt-3 text-sm leading-6 text-text-secondary">
@@ -118,7 +120,7 @@ function MemosApp() {
 
           {/* Memo list */}
           {videoIds.length === 0 ? (
-            <div className="mt-6 rounded-3xl border border-border-subtle bg-white p-12 text-center shadow-sm">
+            <div className="mt-6 rounded-3xl border border-border-subtle bg-bg-base p-12 text-center shadow-sm">
               <svg
                 className="mx-auto mb-4 text-text-muted opacity-40"
                 width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -181,7 +183,7 @@ function VideoMemoGroup({
   onDelete,
 }: VideoMemoGroupProps) {
   return (
-    <div className="rounded-2xl border border-border-subtle bg-white shadow-sm overflow-hidden">
+    <div className="rounded-2xl border border-border-subtle bg-bg-base shadow-sm overflow-hidden">
       {/* Video header */}
       <div className="flex items-center gap-3 px-5 py-3 bg-bg-subtle border-b border-border-subtle">
         <img

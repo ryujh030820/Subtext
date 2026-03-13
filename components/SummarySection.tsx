@@ -289,7 +289,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
             {/* Error state */}
             {error && !isGenerating && (
               <div className="flex items-center gap-2">
-                <p className="text-sm text-red-500">{error}</p>
+                <p className="text-sm text-danger">{error}</p>
                 <button
                   onClick={handleRetry}
                   className="text-xs text-accent-brand hover:underline font-medium shrink-0"
@@ -324,7 +324,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
                 ? keywords.slice(0, 3).map((kw, i) => (
                     <span
                       key={i}
-                      className="shrink-0 px-2.5 py-1 bg-white/50 backdrop-blur-sm rounded-lg text-[10px] text-accent-brand font-bold"
+                      className="shrink-0 px-2.5 py-1 bg-bg-base/50 backdrop-blur-sm rounded-lg text-[10px] text-accent-brand font-bold"
                     >
                       #{kw}
                     </span>
@@ -333,8 +333,8 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
                   ? null
                   : (
                     <>
-                      <span className="shrink-0 px-2.5 py-1 bg-white/50 backdrop-blur-sm rounded-lg text-[10px] text-accent-brand font-bold">#keywords</span>
-                      <span className="shrink-0 px-2.5 py-1 bg-white/50 backdrop-blur-sm rounded-lg text-[10px] text-accent-brand font-bold">#summarizing</span>
+                      <span className="shrink-0 px-2.5 py-1 bg-bg-base/50 backdrop-blur-sm rounded-lg text-[10px] text-accent-brand font-bold">#keywords</span>
+                      <span className="shrink-0 px-2.5 py-1 bg-bg-base/50 backdrop-blur-sm rounded-lg text-[10px] text-accent-brand font-bold">#summarizing</span>
                     </>
                   )}
             </div>
@@ -354,13 +354,13 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
 
                 <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${showDetailed ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
                   <div className="overflow-hidden">
-                    <div className="mt-4 pt-4 bg-white/30 rounded-xl p-3">
+                    <div className="mt-4 pt-4 bg-bg-base/30 rounded-xl p-3">
                       <div className="max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
                         {isDetailedLoading && (
                           <div className="space-y-3">
-                            <div className="h-3 bg-white/50 rounded-full animate-pulse w-full" />
-                            <div className="h-3 bg-white/50 rounded-full animate-pulse w-5/6" />
-                            <div className="h-3 bg-white/50 rounded-full animate-pulse w-4/6" />
+                            <div className="h-3 bg-bg-base/50 rounded-full animate-pulse w-full" />
+                            <div className="h-3 bg-bg-base/50 rounded-full animate-pulse w-5/6" />
+                            <div className="h-3 bg-bg-base/50 rounded-full animate-pulse w-4/6" />
                           </div>
                         )}
                         {!isDetailedLoading && detailedSummary && (
@@ -401,7 +401,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
           </button>
 
         {open && (
-          <div className="absolute left-0 right-0 mt-2 py-2 bg-white rounded-2xl shadow-2xl animate-fade-in z-30 overflow-hidden ring-1 ring-black/5">
+          <div className="absolute left-0 right-0 mt-2 py-2 bg-bg-base rounded-2xl shadow-2xl animate-fade-in z-30 overflow-hidden ring-1 ring-black/5">
             <div className="px-4 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-text-muted">
               {ui.t('summary.download.selectTrack')}
             </div>
@@ -452,7 +452,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
               </button>
             ))}
             {downloadError && (
-              <p className="px-4 py-2 text-[11px] text-red-500 font-medium">
+              <p className="px-4 py-2 text-[11px] text-danger font-medium">
                 {downloadError}
               </p>
             )}
@@ -463,7 +463,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
         <div ref={memoRef} className="relative">
           <button
             onClick={() => setMemoOpen(!memoOpen)}
-            className="shrink-0 h-10 px-4 text-xs font-bold rounded-xl bg-violet-600 text-white hover:bg-violet-700 active:scale-[0.97] transition-all flex items-center gap-2 shadow-sm shadow-violet-200"
+            className="shrink-0 h-10 px-4 text-xs font-bold rounded-xl bg-accent-brand text-white hover:bg-accent-brand/90 active:scale-[0.97] transition-all flex items-center gap-2 shadow-sm shadow-accent-brand/20"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 5v14M5 12h14" />
@@ -472,10 +472,10 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
           </button>
 
           {memoOpen && (
-            <div className="absolute right-0 mt-2 w-80 p-4 bg-white rounded-2xl shadow-2xl animate-fade-in z-30 ring-1 ring-black/5 flex flex-col gap-3">
+            <div className="absolute right-0 mt-2 w-80 p-4 bg-bg-base rounded-2xl shadow-2xl animate-fade-in z-30 ring-1 ring-black/5 flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-text-primary uppercase tracking-wider">{ui.t('memo.new')}</span>
-                <span className="text-[10px] font-bold text-violet-600 bg-violet-50 px-2 py-0.5 rounded-lg">
+                <span className="text-[10px] font-bold text-accent-brand bg-accent-soft px-2 py-0.5 rounded-lg">
                   {formatTimestamp(currentTime)}
                 </span>
               </div>
@@ -496,7 +496,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
                 }}
                 placeholder={ui.t('memo.placeholder')}
                 rows={3}
-                className="w-full px-3 py-2.5 text-sm bg-bg-subtle rounded-xl resize-none text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-violet-100 font-medium"
+                className="w-full px-3 py-2.5 text-sm bg-bg-subtle rounded-xl resize-none text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent-brand/10 font-medium"
                 autoFocus
               />
               <div className="flex justify-end mt-1">
@@ -510,7 +510,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
                     });
                   }}
                   disabled={!memoContent.trim() || memoSaving}
-                  className="h-8 px-4 text-xs font-bold rounded-lg bg-violet-600 text-white hover:bg-violet-700 disabled:opacity-50 transition-all active:scale-[0.97]"
+                  className="h-8 px-4 text-xs font-bold rounded-lg bg-accent-brand text-white hover:bg-accent-brand/90 disabled:opacity-50 transition-all active:scale-[0.97]"
                 >
                   {ui.t('common.save')}
                 </button>
@@ -523,7 +523,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
                     {memos.map((memo) => (
                       <div key={memo.id} className="p-3 bg-bg-subtle/50 rounded-xl group relative transition-all hover:bg-bg-subtle/80">
                         <div className="flex items-center justify-between mb-1.5">
-                          <span className="text-[10px] font-bold text-text-muted bg-white px-1.5 py-0.5 rounded shadow-sm">
+                          <span className="text-[10px] font-bold text-text-muted bg-bg-base px-1.5 py-0.5 rounded shadow-sm">
                             {formatTimestamp(memo.timestamp)}
                           </span>
                           <button
@@ -532,7 +532,7 @@ export function SummarySection({ segments, targetLanguage, fetchTrack }: Props) 
                                 void removeMemo(videoId, memo.id);
                               }
                             }}
-                            className="opacity-0 group-hover:opacity-100 text-[10px] text-red-400 hover:text-red-500 font-bold transition-all"
+                            className="opacity-0 group-hover:opacity-100 text-[10px] text-danger/70 hover:text-danger font-bold transition-all"
                           >
                             {ui.t('common.delete')}
                           </button>
@@ -594,8 +594,8 @@ function DetailedSummaryToolbar({ markdown, videoTitle }: { markdown: string; vi
   };
 
   const btnClass = 'flex items-center gap-1.5 px-2.5 py-1.5 text-[10px] font-bold rounded-lg transition-all';
-  const defaultClass = `${btnClass} text-text-muted hover:text-text-primary hover:bg-white/50`;
-  const copiedClass = `${btnClass} text-emerald-600 bg-emerald-50`;
+  const defaultClass = `${btnClass} text-text-muted hover:text-text-primary hover:bg-bg-elevated/50`;
+  const copiedClass = `${btnClass} text-green-500 bg-green-500/10`;
 
   return (
     <div className="mt-3 pt-3 flex flex-wrap gap-1.5">

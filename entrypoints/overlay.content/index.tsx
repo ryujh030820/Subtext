@@ -56,7 +56,7 @@ export default defineContentScript({
         ui.shadowHost.style.pointerEvents = 'auto';
         root.render(
           <React.StrictMode>
-            <App onClose={() => togglePanel()} />
+            <App onClose={() => togglePanel()} shadowHost={ui.shadowHost} />
           </React.StrictMode>,
         );
       } else {

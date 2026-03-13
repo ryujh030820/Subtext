@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import './style.css';
 import { useSubtitleStore } from '@/lib/stores/subtitle-store';
 import { useMemoStore } from '@/lib/stores/memo-store';
 import { sendMessage, onMessage } from '@/lib/messaging';
@@ -20,11 +21,14 @@ import {
 } from '@/lib/output-language';
 import { UiTextProvider, createUiText } from '@/lib/ui-text';
 import { SubtextIcon } from '@/components/SubtextIcon';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { useTheme } from '@/lib/use-theme';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('script');
   const [targetLanguage, setTargetLanguage] = useState<OutputLanguageCode>(DEFAULT_OUTPUT_LANGUAGE);
   const [isLanguageReady, setIsLanguageReady] = useState(false);
+  const { resolved, cycleTheme } = useTheme();
   const {
     videoId,
     sourceSegments,
@@ -217,7 +221,7 @@ export default function App() {
 
   return (
     <UiTextProvider language={targetLanguage}>
-    <div className="flex flex-col h-screen bg-white text-text-primary">
+    <div className="flex flex-col h-screen bg-bg-base text-text-primary">
       {/* 헤더 */}
       <header className="px-6 py-5 flex items-center justify-between glass sticky top-0 z-20">
         <div className="min-w-0 flex-1">
@@ -233,9 +237,10 @@ export default function App() {
             </p>
           )}
         </div>
+        <ThemeToggle resolved={resolved} onToggle={cycleTheme} />
       </header>
 
-      <div className="flex-1 overflow-y-auto flex flex-col bg-white">
+      <div className="flex-1 overflow-y-auto flex flex-col bg-bg-base">
         {/* AI 요약 영역 */}
         {videoId && segments.length > 0 && (
           <div className="px-5 py-3">
@@ -278,7 +283,7 @@ export default function App() {
         {/* 탭 네비게이션 & 콘텐츠 */}
         {videoId && (
           <div className="flex-1 flex flex-col min-h-0 bg-bg-subtle/30">
-            <nav className="px-4 py-3 flex gap-1 justify-center sticky top-0 bg-white/80 backdrop-blur-md z-10">
+            <nav className="px-4 py-3 flex gap-1 justify-center sticky top-0 bg-bg-base/80 backdrop-blur-md z-10">
               {tabs.map((tab) => (
                 <button
                   key={tab.key}

@@ -270,7 +270,7 @@ export function ChatTab({ targetLanguage }: Props) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col h-full bg-bg-base">
       {/* Messages */}
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3">
         {messages.length === 0 && !isLoading && (
@@ -295,7 +295,7 @@ export function ChatTab({ targetLanguage }: Props) {
                   <button
                     key={i}
                     onClick={() => void handleSend(q)}
-                    className="w-full text-left px-4 py-3 text-sm text-text-secondary font-medium bg-bg-subtle hover:bg-white hover:shadow-md hover:scale-[1.01] rounded-xl transition-all"
+                    className="w-full text-left px-4 py-3 text-sm text-text-secondary font-medium bg-bg-subtle hover:bg-bg-base hover:shadow-md hover:scale-[1.01] rounded-xl transition-all"
                   >
                     {q}
                   </button>
@@ -352,7 +352,7 @@ export function ChatTab({ targetLanguage }: Props) {
         {/* Error */}
         {error && (
           <div className="flex justify-center my-2">
-            <p className="text-xs text-red-500 bg-red-50 font-bold px-4 py-2 rounded-xl">{error}</p>
+            <p className="text-xs text-danger bg-danger/10 font-bold px-4 py-2 rounded-xl">{error}</p>
           </div>
         )}
 
@@ -360,7 +360,7 @@ export function ChatTab({ targetLanguage }: Props) {
       </div>
 
       {/* Input */}
-      <div className="px-4 py-4 bg-white/80 backdrop-blur-md">
+      <div className="px-4 py-4 bg-bg-base/80 backdrop-blur-md">
         <div className="flex items-end gap-2.5">
           {/* Settings gear */}
           <div ref={settingsRef} className="relative">
@@ -380,13 +380,13 @@ export function ChatTab({ targetLanguage }: Props) {
             </button>
 
             {settingsOpen && (
-              <div className="absolute left-0 bottom-full mb-3 w-80 p-4 bg-white rounded-2xl shadow-2xl animate-fade-in z-30 ring-1 ring-black/5">
+              <div className="absolute left-0 bottom-full mb-3 w-80 p-4 bg-bg-base rounded-2xl shadow-2xl animate-fade-in z-30 ring-1 ring-black/5">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[11px] font-bold text-text-primary uppercase tracking-wider">{ui.t('chat.customPrompt')}</span>
                   {customPrompt.trim() && (
                     <button
                       onClick={() => setCustomPrompt('')}
-                      className="text-[10px] font-bold text-text-muted hover:text-red-500 transition-colors"
+                      className="text-[10px] font-bold text-text-muted hover:text-danger transition-colors"
                     >
                       {ui.t('common.delete')}
                     </button>
@@ -410,7 +410,7 @@ export function ChatTab({ targetLanguage }: Props) {
             onKeyDown={handleKeyDown}
             placeholder={ui.t('chat.placeholder')}
             rows={1}
-            className="flex-1 px-4 py-3 text-sm bg-bg-elevated rounded-2xl resize-none text-text-primary placeholder:text-text-muted transition-all focus:outline-none focus:bg-white focus:ring-4 focus:ring-accent-brand/5 max-h-32 font-medium"
+            className="flex-1 px-4 py-3 text-sm bg-bg-elevated rounded-2xl resize-none text-text-primary placeholder:text-text-muted transition-all focus:outline-none focus:bg-bg-base focus:ring-4 focus:ring-accent-brand/5 max-h-32 font-medium"
             style={{ minHeight: '44px' }}
           />
           <button

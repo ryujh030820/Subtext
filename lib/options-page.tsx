@@ -9,13 +9,18 @@ import {
 import {
   getPreferredOutputLanguage,
   setPreferredOutputLanguage,
+  getPreferredTheme,
+  setPreferredTheme,
+  type ThemeMode,
 } from '@/lib/preferences';
+import { useTheme } from '@/lib/use-theme';
 import { UiTextProvider, createUiText } from '@/lib/ui-text';
 import './options-page.css';
 
 function OptionsApp() {
   const [language, setLanguage] = useState<OutputLanguageCode>(DEFAULT_OUTPUT_LANGUAGE);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { mode, setTheme } = useTheme();
   const ui = createUiText(language);
 
   useEffect(() => {
@@ -39,7 +44,7 @@ function OptionsApp() {
   return (
     <UiTextProvider language={language}>
     <main className="min-h-screen px-6 py-10">
-      <div className="mx-auto max-w-2xl rounded-3xl border border-border-subtle bg-white p-8 shadow-sm">
+      <div className="mx-auto max-w-2xl rounded-3xl border border-border-subtle bg-bg-base p-8 shadow-sm">
         <p className="text-sm font-semibold text-accent-brand">{ui.t('options.title')}</p>
         <h1 className="mt-2 text-2xl font-semibold text-text-primary">{ui.t('options.language')}</h1>
         <p className="mt-3 text-sm leading-6 text-text-secondary">
@@ -53,6 +58,24 @@ function OptionsApp() {
               <p className="mt-1 text-xs text-text-muted">{ui.t('options.currentSelection', { label: selected.label })}</p>
             </div>
             <LanguageSelect value={language} disabled={!isLoaded} onChange={handleChange} />
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-border-default bg-bg-subtle p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <div className="shrink-0">
+              <p className="text-sm font-medium text-text-primary">{ui.t('options.theme')}</p>
+              <p className="mt-1 text-xs text-text-muted">{ui.t('options.themeDescription')}</p>
+            </div>
+            <select
+              value={mode}
+              onChange={(e) => setTheme(e.target.value as ThemeMode)}
+              className="rounded-lg border border-border-default bg-bg-base px-3 py-2 text-sm font-medium text-text-primary outline-none"
+            >
+              <option value="system">{ui.t('options.theme.system')}</option>
+              <option value="light">{ui.t('options.theme.light')}</option>
+              <option value="dark">{ui.t('options.theme.dark')}</option>
+            </select>
           </div>
         </div>
 
