@@ -6,7 +6,7 @@ export default defineConfig({
     manifest: {
         name: "Subtext - YouTube Subtitle Viewer",
         description:
-            "✨ Get AI summaries, timelines, and articles from any YouTube video. Search transcripts, translate subtitles, and take notes — all in one!",
+            "✨ AI summaries, timelines, and articles from any YouTube video. Search transcripts, translate subtitles, and take notes.",
         version: "0.1.0",
         permissions: ["storage", "activeTab", "cookies"],
         host_permissions: [
